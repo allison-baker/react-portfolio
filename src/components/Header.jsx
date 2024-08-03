@@ -3,12 +3,23 @@ import Navigation from './Navigation'
 
 function Header() {
 	const [active, setActive] = useState('home')
+    window.onscroll = function() {scrollTransition()}
+
+    function scrollTransition() {
+        if (document.body.scrollTop > 140 || document.documentElement.scrollTop > 140) {
+            document.querySelector('#main-header').className = 'scrolled-header'
+            document.querySelector('#logo').src = '/personal_logo225.png'
+        } else {
+            document.querySelector('#main-header').className = 'initial-header'
+            document.querySelector('#logo').src = '/personal_logo_transparent.png'
+        }
+    }
 
 	return (
 		<>
-			<div className='fixed top-0 w-full flex flex-row items-stretch justify-between p-8 z-10'>
+			<div id='main-header' className='initial-header'>
 				<div className='clickable flex flex-row items-center gap-4'>
-					<img src='/personal_logo_transparent.png' alt='personal logo' width='75' height='75' />
+					<img id='logo' src='/personal_logo_transparent.png' alt='personal logo' width='75' height='75' />
 					<h1 className='text-xl font-bold text-base-100'>
 						<a href='#home' onClick={() => setActive('home')}>
 							al baker
